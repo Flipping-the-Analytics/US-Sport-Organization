@@ -15,3 +15,9 @@ class Division:
     def displayperformances(self):
         for gymnast in self.gymnasts:
             self.gymnasts[gymnast].displayperformances()
+
+    def findingmax(self,apparatus):
+        scoresappartus=[self.gymnasts[x].findingmax(apparatus) for x in self.gymnasts]
+        return max(scoresappartus)
+
+    
