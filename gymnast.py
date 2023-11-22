@@ -13,3 +13,14 @@ class Gymnast:
         for i in range(len(self.performances)):
             print("name: " + self.name, end = " | ")
             self.performances[i].displayperformance()
+    
+    def findchancesofselling(self, round):
+       gymnastschancesofselling = dict()
+       if self.performances[0].country == "USA":  ##self.performances[0] refers to the apparatus for the dude on team usa
+         for i in self.performances:
+            for j in self.performances: ##return dictionary, key = gymanst name, item = chanceofselling number
+              if self.performances[i].apparatus == self.performances[j]:
+                   gymnastname = self.performance[i]
+                   pass
+                
+        
