@@ -27,3 +27,9 @@ class Performance:
         print("escore: " + str(self.escore), end = " | ")
         print("penalty: " + str(self.penalty), end = " | ")
         print("score: " + str(self.score))
+        
+    
+        
+        
+
+    
