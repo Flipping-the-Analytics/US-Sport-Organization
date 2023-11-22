@@ -17,3 +17,8 @@ class TeamGenerator:
         self.wdivision.displayperformances()
         print("Men's Division:")
         self.mdivision.displayperformances()
+
+    # use for testing internal functions
+    def test(self):
+        return
+        
