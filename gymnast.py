@@ -21,6 +21,6 @@ class Gymnast:
             for j in self.performances: ##return dictionary, key = gymanst name, item = chanceofselling number
               if self.performances[i].apparatus == self.performances[j]:
                    gymnastname = self.performance[i]
-                   pass
+                   pass #ssadasdasd
                 
         
