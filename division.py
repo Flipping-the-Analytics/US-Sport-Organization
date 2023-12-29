@@ -43,4 +43,18 @@ class Division:
         
         return(medalopportunitysorted)
 
-    
+    def amountoff(self):
+
+        j=0
+        apparatus=["BB","UB","VT","FX",]
+        while(j<4):
+
+            medalsortedList=medalopportunity(apparatus[j],findingmax(apparatus[j]))
+
+            allNamesandAmount=[]
+            for i in range(len(medalsortedList)):
+                if(medalsortedList[i][0] in data):
+                    data[medalsortedList[i][0]].append(apparatus[j],aaronsCode(medalsortedList[i][0]),apparatus[j])
+                else:    
+                    data={medalsortedList[i][0]:(apparatus[j],aaronsCode(medalsortedList[i][0]),apparatus[j])}
+            j=j+1
