@@ -24,3 +24,10 @@ class Gymnast:
                    pass #ssadasdasd
                 
         
+    def findingmax(self,apparatus):
+        scoresappartus=[x.score for x in self.performances if x.apparatus==apparatus ] + [0]
+        return(round(max(scoresappartus),2))
+    
+    #def medalopportunity(self,apparatus,score):
+     #   medalopportunity=[x.name for x in self.performances if x.score+0.5>score]
+      #  return(medalopportunity)

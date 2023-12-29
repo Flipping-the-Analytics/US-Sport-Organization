@@ -17,3 +17,16 @@ class TeamGenerator:
         self.wdivision.displayperformances()
         print("Men's Division:")
         self.mdivision.displayperformances()
+    
+    def tester(self,gender,apparatus,score=0):
+        if(gender=="m"):
+            return(self.mdivision.findingmax(apparatus))
+        if(gender=="w"):  
+            return(self.wdivision.findingmax(apparatus))
+        #This was a test that i couldn't finish
+        #print(self.wdivision.medalopportunity(apparatus,score))
+
+    # use for testing internal functions
+    def test(self):
+        return
+        
