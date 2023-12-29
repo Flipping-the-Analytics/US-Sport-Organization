@@ -23,10 +23,21 @@ class TeamGenerator:
             return(self.mdivision.findingmax(apparatus))
         if(gender=="w"):  
             return(self.wdivision.findingmax(apparatus))
-        #This was a test that i couldn't finish
-        #print(self.wdivision.medalopportunity(apparatus,score))
+        # print(self.wdivision.medalopportunity("BB", self.wdivision.findingmax("BB")))
 
     # use for testing internal functions
     def test(self):
+        print ("BB", end="")
+        print(self.wdivision.medalopportunity("BB", self.wdivision.findingmax("BB")))
+        print ("UB", end="")
+        print(self.wdivision.medalopportunity("UB", self.wdivision.findingmax("UB")))
+        print ("FX", end="")
+        print(self.wdivision.medalopportunity("FX", self.wdivision.findingmax("FX")))
+        print ("VT", end="")
+        print(self.wdivision.medalopportunity("VT", self.wdivision.findingmax("VT")))
+        print ("VT-1", end="")
+        print(self.wdivision.medalopportunity("VT-1", self.wdivision.findingmax("VT-1")))
+        print ("VT-2", end="")
+        print(self.wdivision.medalopportunity("VT-2", self.wdivision.findingmax("VT-2")))
         return
         
