@@ -23,3 +23,5 @@ if __name__ == "__main__":
     
     #womenFX=teamgenerator.tester("w","FX",womenFX)
     #teamgenerator.displayperformances()
+    # teamgenerator.displayperformances()
+    teamgenerator.test()

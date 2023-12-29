@@ -26,4 +26,7 @@ class TeamGenerator:
         #This was a test that i couldn't finish
         #print(self.wdivision.medalopportunity(apparatus,score))
 
+    # use for testing internal functions
+    def test(self):
+        return
         
