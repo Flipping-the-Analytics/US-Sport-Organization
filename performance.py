@@ -1,7 +1,8 @@
 # storage class for the values associated with a gymnast's performance
 class Performance:
-    def __init__(self, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
+    def __init__(self, gender, name, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
         self.gender = gender
+        self.name = name
         self.country = country
         self.date = date
         self.competition = competition
@@ -27,3 +28,9 @@ class Performance:
         print("escore: " + str(self.escore), end = " | ")
         print("penalty: " + str(self.penalty), end = " | ")
         print("score: " + str(self.score))
+        
+    
+        
+        
+
+    
