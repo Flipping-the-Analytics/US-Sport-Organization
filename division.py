@@ -19,8 +19,11 @@ class Division:
     def findingmax(self,apparatus):
         scoresappartus=[self.gymnasts[x].findingmax(apparatus) for x in self.gymnasts]
         scoresappartus.sort()
+
         return float(max(scoresappartus))
     
+
+
     def medalopportunity(self, apparatus, maxscore):
 
         # gets a list of all american gymnasts within a given range of the max score
@@ -42,7 +45,10 @@ class Division:
             medalopportunity.pop(index)
         
         return(medalopportunitysorted)
+
     
+    
+
     def numberofpeoplebetweengymnastandfirstplace(self, apparatus, name):
         gymnast_score = None
         firstplace_score = self.findingmax(apparatus)
@@ -57,8 +63,10 @@ class Division:
                 break
 
 
+
         if(gymnast_score==None):
             return(3000)
+
         # Iterate through all gymnasts and their performances and append to list
         for i in self.gymnasts.values():
             perind = 0
@@ -84,6 +92,7 @@ class Division:
         #      apparatus_names.append(performance.name)
         
 
+
         #print(apparatus_names)
         # Count the number of unique gymnasts between the specified gymnast and the first place
         
@@ -105,7 +114,36 @@ class Division:
         print(round(count * score_difference,5))
         return round(count*score_difference,5)
 
-    def amountoff(self):
+   
+
+
+        #print(apparatus_names)
+        # Count the number of unique gymnasts between the specified gymnast and the first place
+        
+        # for i in apparatus_names:
+        #     if i == name:
+        #         break
+        #     count += 1
+        
+          # Count the number of gymnasts between the specified gymnast and the first place
+        for performance in apparatus_performances:
+            if gymnast_score <= performance.score < firstplace_score:
+                count += 1
+                
+        
+        score_difference = firstplace_score - gymnast_score
+        print('gymnast score:', gymnast_score)
+        print('people between:', count)
+        print('score difference:', score_difference)
+        print(count * score_difference)
+        return count*score_difference
+
+    
+
+
+    
+
+ def amountoff(self):
 
         j=0
         apparatus=["BB","UB","VT","FX",]

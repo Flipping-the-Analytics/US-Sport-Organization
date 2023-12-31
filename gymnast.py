@@ -28,4 +28,16 @@ class Gymnast:
             if self.performances[i].apparatus == apparatus and self.performances[i].score > score:
                 couldplace = True
                 score = self.performances[i].score
+
         return couldplace, score
+      
+    def findchancesofselling(self, round):
+       gymnastschancesofselling = dict()
+       if self.performances[0].country == "USA":  ##self.performances[0] refers to the apparatus for the dude on team usa
+         for i in self.performances:
+            for j in self.performances: ##return dictionary, key = gymanst name, item = chanceofselling number
+              if self.performances[i].apparatus == self.performances[j]:
+                   gymnastname = self.performance[i]
+                   pass #ssadasdasd
+
+
