@@ -28,6 +28,7 @@ class Gymnast:
             if self.performances[i].apparatus == apparatus and self.performances[i].score > score:
                 couldplace = True
                 score = self.performances[i].score
+
         return couldplace, score
       
     def findchancesofselling(self, round):
@@ -38,4 +39,5 @@ class Gymnast:
               if self.performances[i].apparatus == self.performances[j]:
                    gymnastname = self.performance[i]
                    pass #ssadasdasd
+
 

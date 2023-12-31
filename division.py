@@ -19,7 +19,10 @@ class Division:
     def findingmax(self,apparatus):
         scoresappartus=[self.gymnasts[x].findingmax(apparatus) for x in self.gymnasts]
         scoresappartus.sort()
-        return max(scoresappartus)
+
+        return float(max(scoresappartus))
+    
+
 
     def medalopportunity(self, apparatus, maxscore):
 
@@ -42,7 +45,10 @@ class Division:
             medalopportunity.pop(index)
         
         return(medalopportunitysorted)
-      
+
+    
+    
+
     def numberofpeoplebetweengymnastandfirstplace(self, apparatus, name):
         gymnast_score = None
         firstplace_score = self.findingmax(apparatus)
@@ -55,6 +61,12 @@ class Division:
             if i.name == name:
                 gymnast_score = i.findingmax(apparatus)
                 break
+
+
+
+        if(gymnast_score==None):
+            return(3000)
+
         # Iterate through all gymnasts and their performances and append to list
         for i in self.gymnasts.values():
             perind = 0
@@ -79,6 +91,31 @@ class Division:
         # for performance in apparatus_performances:
         #      apparatus_names.append(performance.name)
         
+
+
+        #print(apparatus_names)
+        # Count the number of unique gymnasts between the specified gymnast and the first place
+        
+        # for i in apparatus_names:
+        #     if i == name:
+        #         break
+        #     count += 1
+        
+          # Count the number of gymnasts between the specified gymnast and the first place
+        for performance in apparatus_performances:
+            if gymnast_score <= performance.score < firstplace_score:
+                count += 1
+                
+        
+        score_difference = firstplace_score - gymnast_score
+        print('gymnast score:', gymnast_score)
+        print('people between:', count)
+        print('score difference:', score_difference)
+        print(round(count * score_difference,5))
+        return round(count*score_difference,5)
+
+   
+
 
         #print(apparatus_names)
         # Count the number of unique gymnasts between the specified gymnast and the first place
@@ -105,3 +142,30 @@ class Division:
 
 
     
+
+ def amountoff(self):
+
+        j=0
+        apparatus=["BB","UB","VT","FX",]
+        data={}
+        peoplewithchance=set([])
+        for app in apparatus:
+            medalsortedList=self.medalopportunity(app,self.findingmax(app))
+            for people in medalsortedList:
+                peoplewithchance.add(people[0])
+
+
+        while(j<4):
+
+            
+            for people in peoplewithchance:
+                if(people in data):
+                    data[people].append(tuple([apparatus[j],self.numberofpeoplebetweengymnastandfirstplace(apparatus[j],people)]))
+                else:    
+                    data[people]=[tuple([apparatus[j],self.numberofpeoplebetweengymnastandfirstplace(apparatus[j],people)])]
+                    
+                    # data={medalsortedList[i][0]:(apparatus[j],self.numberofpeoplebetweengymnastandfirstplace(apparatus[j],medalsortedList[i][0]))}
+            j=j+1
+        print(data)
+
+        return (data)

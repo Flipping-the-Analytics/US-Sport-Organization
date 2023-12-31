@@ -27,7 +27,9 @@ class TeamGenerator:
 
     # use for testing internal functions
     def test(self):
-        self.wdivision.numberofpeoplebetweengymnastandfirstplace('BB', 'Rebeca ANDRADE')
+
+        self.wdivision.numberofpeoplebetweengymnastandfirstplace('FX', 'Madray JOHNSON')
+        #self.wdivision.amountoff()
         # print ("BB", end="")
         # print(self.wdivision.medalopportunity("BB", self.wdivision.findingmax("BB")))
         # print ("UB", end="")
