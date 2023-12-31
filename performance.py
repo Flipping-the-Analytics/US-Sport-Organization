@@ -1,7 +1,8 @@
 # storage class for the values associated with a gymnast's performance
 class Performance:
-    def __init__(self, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
+    def __init__(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
         self.gender = gender
+        self.name = name
         self.country = country
         self.date = date
         self.competition = competition
@@ -13,6 +14,16 @@ class Performance:
         self.escore = float(escore)
         self.penalty = penalty if len(penalty) > 0 else 0
         self.score = float(score)
+        
+    def __cmp__(self, other):
+        if self.score < other.score:
+            return -1
+        elif self.score > other.score:
+            return 1
+        return 0
+    
+    def __lt__(self, other):
+        return self.score < other.score
 
     def displayperformance(self):
         print("gender: " + self.gender, end = " | ")
@@ -27,3 +38,9 @@ class Performance:
         print("escore: " + str(self.escore), end = " | ")
         print("penalty: " + str(self.penalty), end = " | ")
         print("score: " + str(self.score))
+        
+    
+        
+        
+
+    

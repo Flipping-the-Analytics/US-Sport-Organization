@@ -8,7 +8,7 @@ class Division:
     
     def addperformance(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
         if name in self.gymnasts:
-            self.gymnasts[name].addperformance(gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score)
+            self.gymnasts[name].addperformance(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score)
         else:
             self.gymnasts[name] = Gymnast(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score)
     
@@ -19,7 +19,7 @@ class Division:
     def findingmax(self,apparatus):
         scoresappartus=[self.gymnasts[x].findingmax(apparatus) for x in self.gymnasts]
         scoresappartus.sort()
-        return max(scoresappartus)
+        return float(max(scoresappartus))
     
     def medalopportunity(self, apparatus, maxscore):
 
@@ -55,42 +55,79 @@ class Division:
             if i.name == name:
                 gymnast_score = i.findingmax(apparatus)
                 break
+
+
+        if(gymnast_score==None):
+            return(3000)
         # Iterate through all gymnasts and their performances and append to list
         for i in self.gymnasts.values():
+            perind = 0
+            curind = 0
+            bestscore = 0.0
             for j in i.performances:
-                if j.apparatus == apparatus:
-                    if i.name not in unique_gymnast_names:
-                        cl += 1
-                        apparatus_performances.append(j)
-                        unique_gymnast_names.add(i.name)
-        for performance in apparatus_performances:
-             apparatus_names.append(performance.name)
+                if j.apparatus == apparatus and j.score > bestscore:
+                    bestscore = j.score
+                    perind = curind
+                curind += 1
+            if i.performances[perind].apparatus == apparatus:
+                apparatus_performances.append(i.performances[perind])
+                unique_gymnast_names.add(i.name)
+
+
+
+
+        apparatus_performances.sort(reverse=True)
+
+
+        # #appends names to list
+        # for performance in apparatus_performances:
+        #      apparatus_names.append(performance.name)
+        
+
         #print(apparatus_names)
         # Count the number of unique gymnasts between the specified gymnast and the first place
-        for i in apparatus_names:
-            if i == name:
-                break
-            count += 1
+        
+        # for i in apparatus_names:
+        #     if i == name:
+        #         break
+        #     count += 1
+        
+          # Count the number of gymnasts between the specified gymnast and the first place
+        for performance in apparatus_performances:
+            if gymnast_score <= performance.score < firstplace_score:
+                count += 1
+                
+        
         score_difference = firstplace_score - gymnast_score
         print('gymnast score:', gymnast_score)
         print('people between:', count)
         print('score difference:', score_difference)
-        print(count * score_difference)
+        print(round(count * score_difference,5))
+        return round(count*score_difference,5)
 
     def amountoff(self):
 
         j=0
         apparatus=["BB","UB","VT","FX",]
+        data={}
+        peoplewithchance=set([])
+        for app in apparatus:
+            medalsortedList=self.medalopportunity(app,self.findingmax(app))
+            for people in medalsortedList:
+                peoplewithchance.add(people[0])
+
+
         while(j<4):
 
-            medalsortedList=medalopportunity(apparatus[j],findingmax(apparatus[j]))
-
-            allNamesandAmount=[]
-            for i in range(len(medalsortedList)):
-                if(medalsortedList[i][0] in data):
-                    data[medalsortedList[i][0]].append(apparatus[j],numberofpeoplebetweengymnastandfirstplace(medalsortedList[i][0]),apparatus[j])
+            
+            for people in peoplewithchance:
+                if(people in data):
+                    data[people].append(tuple([apparatus[j],self.numberofpeoplebetweengymnastandfirstplace(apparatus[j],people)]))
                 else:    
-                    data={medalsortedList[i][0]:(apparatus[j],numberofpeoplebetweengymnastandfirstplace(medalsortedList[i][0]),apparatus[j])}
+                    data[people]=[tuple([apparatus[j],self.numberofpeoplebetweengymnastandfirstplace(apparatus[j],people)])]
+                    
+                    # data={medalsortedList[i][0]:(apparatus[j],self.numberofpeoplebetweengymnastandfirstplace(apparatus[j],medalsortedList[i][0]))}
             j=j+1
+        print(data)
 
-        return (allNamesandAmount)
+        return (data)
