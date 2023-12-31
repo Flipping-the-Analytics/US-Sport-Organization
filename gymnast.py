@@ -4,10 +4,10 @@ from performance import Performance
 class Gymnast:
     def __init__(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
         self.name = name
-        self.performances = [Performance(gender, name, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score)]
+        self.performances = [Performance(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score)]
 
-    def addperformance(self, gender, name, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
-        self.performances.append(Performance(gender, name, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score))
+    def addperformance(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
+        self.performances.append(Performance(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score))
 
     def displayperformances(self):
         for i in range(len(self.performances)):
