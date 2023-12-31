@@ -37,7 +37,6 @@ class Division:
             for j in i.performances:
                 if j.apparatus == apparatus:
                     if i.name not in unique_gymnast_names:
-                        cl += 1
                         apparatus_performances.append(j)
                         unique_gymnast_names.add(i.name)
         for performance in apparatus_performances:
@@ -53,12 +52,7 @@ class Division:
         print('people between:', count)
         print('score difference:', score_difference)
         print(count * score_difference)
-
-
-    # def test(self):
-    #     print('hi')
-        
-    #     self.gymnasts['Simone BILES'].numberofpeoplebetweengymnastandfirstplace('UB')
+        return count*score_difference
 
     
 
