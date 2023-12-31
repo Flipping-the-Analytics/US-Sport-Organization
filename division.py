@@ -113,37 +113,9 @@ class Division:
         print('score difference:', score_difference)
         print(round(count * score_difference,5))
         return round(count*score_difference,5)
-
-   
-
-
-        #print(apparatus_names)
-        # Count the number of unique gymnasts between the specified gymnast and the first place
-        
-        # for i in apparatus_names:
-        #     if i == name:
-        #         break
-        #     count += 1
-        
-          # Count the number of gymnasts between the specified gymnast and the first place
-        for performance in apparatus_performances:
-            if gymnast_score <= performance.score < firstplace_score:
-                count += 1
-                
-        
-        score_difference = firstplace_score - gymnast_score
-        print('gymnast score:', gymnast_score)
-        print('people between:', count)
-        print('score difference:', score_difference)
-        print(count * score_difference)
-        return count*score_difference
-
     
 
-
-    
-
- def amountoff(self):
+    def amountoff(self):
 
         j=0
         apparatus=["BB","UB","VT","FX",]
