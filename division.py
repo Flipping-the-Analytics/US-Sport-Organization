@@ -57,31 +57,49 @@ class Division:
                 break
         # Iterate through all gymnasts and their performances and append to list
         for i in self.gymnasts.values():
+            perind = 0
+            curind = 0
+            bestscore = 0.0
             for j in i.performances:
-                if j.apparatus == apparatus:
-                    if i.name not in unique_gymnast_names:
-                        cl += 1
-                        apparatus_performances.append(j)
-                        unique_gymnast_names.add(i.name)
-        for performance in apparatus_performances:
-             apparatus_names.append(performance.name)
+                if j.apparatus == apparatus and j.score > bestscore:
+                    bestscore = j.score
+                    perind = curind
+                curind += 1
+            if i.performances[perind].apparatus == apparatus:
+                apparatus_performances.append(i.performances[perind])
+                unique_gymnast_names.add(i.name)
+
+
+
+
+        apparatus_performances.sort(reverse=True)
+
+
+        # #appends names to list
+        # for performance in apparatus_performances:
+        #      apparatus_names.append(performance.name)
+        
+
         #print(apparatus_names)
         # Count the number of unique gymnasts between the specified gymnast and the first place
-        for i in apparatus_names:
-            if i == name:
-                break
-            count += 1
+        
+        # for i in apparatus_names:
+        #     if i == name:
+        #         break
+        #     count += 1
+        
+          # Count the number of gymnasts between the specified gymnast and the first place
+        for performance in apparatus_performances:
+            if gymnast_score <= performance.score < firstplace_score:
+                count += 1
+                
+        
         score_difference = firstplace_score - gymnast_score
         print('gymnast score:', gymnast_score)
         print('people between:', count)
         print('score difference:', score_difference)
         print(count * score_difference)
-
-
-    # def test(self):
-    #     print('hi')
-        
-    #     self.gymnasts['Simone BILES'].numberofpeoplebetweengymnastandfirstplace('UB')
+        return count*score_difference
 
     
 

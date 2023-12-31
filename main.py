@@ -24,5 +24,4 @@ if __name__ == "__main__":
     #womenFX=teamgenerator.tester("w","FX",womenFX)
     #teamgenerator.displayperformances()
     # teamgenerator.displayperformances()
-    print('yo')
     teamgenerator.test()
