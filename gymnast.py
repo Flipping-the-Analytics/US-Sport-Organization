@@ -7,6 +7,8 @@ class Gymnast:
         self.performances = [Performance(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score)]
 
     def addperformance(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
+        if apparatus == "VT-1" or apparatus == "VT-2":
+            apparatus = "VT"
         self.performances.append(Performance(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score))
 
     def displayperformances(self):
