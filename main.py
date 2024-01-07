@@ -8,4 +8,5 @@ if __name__ == "__main__":
         for lines in csvFile:
             teamgenerator.addperformance(lines[1] + " " + lines[0], lines[2], lines[3], lines[4], lines[5], lines[6], 
                                          lines[7], lines[8], lines[9], lines[10], lines[11], lines[12], lines[13])
-    teamgenerator.generateteams()
+    # teamgenerator.generateteams()
+    teamgenerator.test()

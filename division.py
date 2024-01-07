@@ -1,11 +1,22 @@
+import numpy as np 
+import pandas as pd
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt 
+from pandas.plotting import table 
 from gymnast import Gymnast
 
 # class for storing (and eventually analyzing) each gymnast in either the men's or women's division
 class Division:
-    def __init__(self, gender, srange):
+    def __init__(self, gender, srange, apparatuses):
         self.gender = gender
         self.gymnasts = {}
         self.srange = srange
+        apparatuses.sort()
+        self.apparatuses = apparatuses 
+        self.total = 30000
+        self.team = None
+        self.events = None
+        self.sfdata = None
     
     def addperformance(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
         if name in self.gymnasts:
@@ -23,8 +34,6 @@ class Division:
 
         return float(max(scoresappartus))
     
-
-
     def medalopportunity(self, apparatus, maxscore):
 
         # gets a list of all american gymnasts within a given range of the max score
@@ -47,9 +56,6 @@ class Division:
         
         return(medalopportunitysorted)
 
-    
-    
-
     def numberofpeoplebetweengymnastandfirstplace(self, apparatus, name):
         gymnast_score = None
         firstplace_score = self.findingmax(apparatus)
@@ -61,8 +67,6 @@ class Division:
             if i.name == name:
                 gymnast_score = i.findingmax(apparatus)
                 break
-
-
 
         if(gymnast_score==None):
             return(3000)
@@ -96,36 +100,34 @@ class Division:
         return round(count*score_difference,5)
     
 
-    def amountoff(self, apparatuses):
+    def amountoff(self):
 
         j=0
         data={}
         peoplewithchance=set([])
-        for app in apparatuses:
+        for app in self.apparatuses:
             medalsortedList=self.medalopportunity(app,self.findingmax(app))
             for people in medalsortedList:
                 peoplewithchance.add(people[0])
 
-
-        while(j<len(apparatuses)):
-
-            
+        while(j<len(self.apparatuses)): 
             for people in peoplewithchance:
                 if(people in data):
-                    data[people].append(tuple([apparatuses[j],self.numberofpeoplebetweengymnastandfirstplace(apparatuses[j],people)]))
+                    data[people].append(tuple([self.apparatuses[j],self.numberofpeoplebetweengymnastandfirstplace(self.apparatuses[j],people)]))
                 else:    
-                    data[people]=[tuple([apparatuses[j],self.numberofpeoplebetweengymnastandfirstplace(apparatuses[j],people)])]
+                    data[people]=[tuple([self.apparatuses[j],self.numberofpeoplebetweengymnastandfirstplace(self.apparatuses[j],people)])]
             j=j+1
         # print(data)
 
-        return (data)
+
+        self.sfdata = data
     
-    def determinesf(self, team, data, apparatuses):
+    def determinesf(self, team):
 
         allaroundsf = {}
         for gymnast in team:
             allsf = 0
-            for sf in data[gymnast]:
+            for sf in self.sfdata[gymnast]:
                 allsf += sf[1]
             allaroundsf[gymnast] = allsf
         allaround1 = min(allaroundsf, key=lambda x: allaroundsf[x])
@@ -134,10 +136,10 @@ class Division:
 
         apparatustotals = {}
         appparticipants = {"AA": [allaround1, allaround2]}
-        for apparatus in apparatuses:
+        for apparatus in self.apparatuses:
             gymnastvalues = {}
             for gymnast in team:
-                scorefactor = [val[1] for val in data[gymnast] if val[0] == apparatus][0]
+                scorefactor = [val[1] for val in self.sfdata[gymnast] if val[0] == apparatus][0]
                 gymnastvalues[gymnast] = scorefactor
             
             apparatustotals[apparatus] = 0
@@ -162,16 +164,13 @@ class Division:
         sftotal = sum(apparatustotals.values())
         return sftotal, team, appparticipants
 
+    def maketeam(self):
 
-
-
-    def maketeam(self, apparatuses):
-
-        data = self.amountoff(apparatuses)
+        self.amountoff()
 
         possibleteams = []
         team = set([])
-        gymnasts = [gymnast for gymnast in data]
+        gymnasts = [gymnast for gymnast in self.sfdata]
         numgym = len(gymnasts)
         for i in range(numgym):
             if i + 4 < numgym:
@@ -194,33 +193,54 @@ class Division:
                         team.remove(gymnasts[j])
                 team.remove(gymnasts[i])
 
-        sftotal = 30000
-        bestteam = None
-        events = None
-
         for tm in possibleteams:
-            temptotal, tempteam, tempevents = self.determinesf(tm, data, apparatuses)
-            if temptotal < sftotal:
-                sftotal = temptotal
-                bestteam = tempteam
-                events = tempevents
+            temptotal, tempteam, tempevents = self.determinesf(tm)
+            if temptotal < self.total:
+                self.total = temptotal
+                self.team = sorted(tempteam)
+                self.events = tempevents
         
         print("Team")
-        for gymnast in bestteam:
-            if bestteam.index(gymnast) != 4:
+        for gymnast in self.team:
+            if self.team.index(gymnast) != 4:
                 print(gymnast, end = ", ")
             else:
                 print(gymnast)
         print("Event Lineup")
-        for event in events:
+        for event in self.events:
             print(event + ":", end = " ")
-            for gymnast in events[event]:
-                if events[event].index(gymnast) != 3 and (event != "AA" or events[event].index(gymnast) != 1):
+            for gymnast in self.events[event]:
+                if self.events[event].index(gymnast) != 3 and (event != "AA" or self.events[event].index(gymnast) != 1):
                     print(gymnast, end = ", ")
                 else:
                     print(gymnast)
-        print("Score Factor Total: " + str(sftotal))
+        print("Score Factor Total: " + str(self.total))
 
+    def displaytable(self):
+        tabledata = []
+        for gymnast in self.team:
+            tabledata.append([])
+            self.sfdata[gymnast] = sorted(self.sfdata[gymnast], key=lambda x: x[0])
+            for datapair in self.sfdata[gymnast]:
+                tabledata[-1].append(datapair[1])
+            tabledata[-1].append(gymnast)
+        iris = load_iris() 
+         
+        iris_df = pd.DataFrame(data=tabledata,
+                               columns=self.apparatuses+["Gymnast Name"]) 
+        
+        grouped_dataframe = iris_df.groupby("Gymnast Name").mean().round(2) 
+        grouped_dataframe["Gymnast Name"] = self.team 
+        
+        plt.figure(figsize=(12, 4))
+        plt.title("Score factors in each apparatus")
+        plt.axis('off')
+        plt.subplots_adjust(top=0.8)
+
+        table(ax=plt.gca(), data=grouped_dataframe.drop(['Gymnast Name'], axis=1), loc='center')
+
+        plt.show()
+            
 
 
     
