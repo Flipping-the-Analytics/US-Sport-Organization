@@ -74,20 +74,6 @@ class Division:
 
         apparatus_performances.sort(reverse=True)
 
-
-        # #appends names to list
-        # for performance in apparatus_performances:
-        #      apparatus_names.append(performance.name)
-        
-
-        #print(apparatus_names)
-        # Count the number of unique gymnasts between the specified gymnast and the first place
-        
-        # for i in apparatus_names:
-        #     if i == name:
-        #         break
-        #     count += 1
-        
           # Count the number of gymnasts between the specified gymnast and the first place
         for performance in apparatus_performances:
             if gymnast_score <= performance.score < firstplace_score:
