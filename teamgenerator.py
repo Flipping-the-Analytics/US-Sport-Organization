@@ -3,8 +3,8 @@ from division import Division
 # class for generating a potential olympic team for men and women
 class TeamGenerator:
     def __init__(self):
-        self.wdivision = Division("w", 1.4)
-        self.mdivision = Division("m", 0.8)
+        self.wdivision = Division("w", 1.4, ["BB", "UB", "FX", "VT"])
+        self.mdivision = Division("m", 0.8, ["FX", "HB", "PB", "PH", "SR", "VT"])
 
     def addperformance(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
         if gender == "w":
@@ -20,12 +20,13 @@ class TeamGenerator:
 
     def generateteams(self):
         print("Women's Division")
-        self.wdivision.maketeam(["BB", "UB", "FX", "VT"])
+        self.wdivision.maketeam()
         print("Men's Division")
-        self.mdivision.maketeam(["FX", "HB", "PB", "PH", "SR", "VT"])
+        self.mdivision.maketeam()
 
     # use for testing internal functions
     def test(self):
-        self.wdivision.maketeam(["BB", "UB", "FX", "VT"])
+        self.wdivision.maketeam()
+        self.wdivision.displaytable()
         return
         
