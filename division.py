@@ -59,7 +59,7 @@ class Division:
     def numberofpeoplebetweengymnastandfirstplace(self, apparatus, name):
         gymnast_score = None
         firstplace_score = self.findingmax(apparatus)
-        count = 0
+        count = 1
         apparatus_performances = []
         unique_gymnast_names = set()
         # Find the score of the specified gymnast
