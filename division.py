@@ -232,7 +232,7 @@ class Division:
         grouped_dataframe = iris_df.groupby("Gymnast Name").mean().round(2) 
         grouped_dataframe["Gymnast Name"] = self.team 
         
-        plt.figure(figsize=(12, 4))
+        plt.figure(figsize=(len(self.apparatuses) * 3, 4))
         plt.title("Score factors in each apparatus")
         plt.axis('off')
         plt.subplots_adjust(top=0.8)
