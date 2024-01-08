@@ -59,7 +59,7 @@ class Division:
     def numberofpeoplebetweengymnastandfirstplace(self, apparatus, name):
         gymnast_score = None
         firstplace_score = self.findingmax(apparatus)
-        count = 0
+        count = 1
         apparatus_performances = []
         unique_gymnast_names = set()
         # Find the score of the specified gymnast
@@ -89,6 +89,8 @@ class Division:
 
         for performance in apparatus_performances:
             if gymnast_score <= performance.score < firstplace_score:
+                if name == performance.name:
+                    continue
                 count += 1
                 
         
@@ -155,7 +157,7 @@ class Division:
             appparticipants[apparatus].append(thirdparticipant)
             gymnastvalues.pop(thirdparticipant)
             fourthparticipant = min(gymnastvalues, key=lambda x: gymnastvalues[x])
-            # apparatustotals[apparatus] += gymnastvalues[fourthparticipant]
+            apparatustotals[apparatus] += gymnastvalues[fourthparticipant] if gymnastvalues[fourthparticipant] > 4000 else gymnastvalues[fourthparticipant] / 6
             appparticipants[apparatus].append(fourthparticipant)
             gymnastvalues.pop(fourthparticipant)
 
@@ -229,16 +231,25 @@ class Division:
         iris_df = pd.DataFrame(data=tabledata,
                                columns=self.apparatuses+["Gymnast Name"]) 
         
-        grouped_dataframe = iris_df.groupby("Gymnast Name").mean().round(2) 
+        grouped_dataframe = iris_df.groupby("Gymnast Name").mean().round(2)
         grouped_dataframe["Gymnast Name"] = self.team 
         
+        cell_colors = []
+        for row in range(len(tabledata)):
+            cell_colors.append([])
+            for col in range(len(tabledata[0]) - 1):
+                if tabledata[row][-1] in self.events[self.apparatuses[col]]:
+                    cell_colors[-1].append("yellow")
+                else:
+                    cell_colors[-1].append("white")
+
         plt.figure(figsize=(len(self.apparatuses) * 3, 4))
         plt.title("Score factors in each apparatus")
-        plt.axis('off')
+        plt.axis("off")
         plt.subplots_adjust(top=0.8)
 
-        table(ax=plt.gca(), data=grouped_dataframe.drop(['Gymnast Name'], axis=1), loc='center')
-
+        table(ax=plt.gca(), data=grouped_dataframe.drop(["Gymnast Name"], axis=1), cellColours=cell_colors, loc="center")
+        
         plt.show()
             
 
