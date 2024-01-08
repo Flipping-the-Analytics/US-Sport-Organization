@@ -222,34 +222,35 @@ class Division:
         tabledata = []
         for gymnast in self.team:
             tabledata.append([])
+            tabledata[-1].append(gymnast)
             self.sfdata[gymnast] = sorted(self.sfdata[gymnast], key=lambda x: x[0])
             for datapair in self.sfdata[gymnast]:
-                tabledata[-1].append(datapair[1])
-            tabledata[-1].append(gymnast)
-        iris = load_iris() 
+                tabledata[-1].append(datapair[1]) 
          
         iris_df = pd.DataFrame(data=tabledata,
-                               columns=self.apparatuses+["Gymnast Name"]) 
+                               columns=["Gymnast Name"]+self.apparatuses) 
         
-        grouped_dataframe = iris_df.groupby("Gymnast Name").mean().round(2)
-        grouped_dataframe["Gymnast Name"] = self.team 
+        grouped_dataframe = iris_df
         
         cell_colors = []
         for row in range(len(tabledata)):
             cell_colors.append([])
+            cell_colors[-1].append("white")
             for col in range(len(tabledata[0]) - 1):
-                if tabledata[row][-1] in self.events[self.apparatuses[col]]:
+                if tabledata[row][0] in self.events[self.apparatuses[col]]:
                     cell_colors[-1].append("yellow")
                 else:
                     cell_colors[-1].append("white")
 
-        plt.figure(figsize=(len(self.apparatuses) * 3, 4))
-        plt.title("Score factors in each apparatus")
+        plt.figure(figsize=(len(self.apparatuses) * 4, 8))
+        plt.title("Score factors in each apparatus", fontsize=20, y = 1.15)
         plt.axis("off")
         plt.subplots_adjust(top=0.8)
 
-        table(ax=plt.gca(), data=grouped_dataframe.drop(["Gymnast Name"], axis=1), cellColours=cell_colors, loc="center")
-        
+        sftable = plt.table(cellText=grouped_dataframe.values, colLabels=grouped_dataframe.columns, cellColours=cell_colors, loc="center", cellLoc="center",
+              rowLoc="center", bbox=[0, 0, 1, 1.1])
+        sftable.auto_set_font_size(False)
+        sftable.set_fontsize(15)
         plt.show()
             
 
