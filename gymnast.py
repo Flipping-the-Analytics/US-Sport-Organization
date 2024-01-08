@@ -7,6 +7,8 @@ class Gymnast:
         self.performances = [Performance(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score)]
 
     def addperformance(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
+        if apparatus == "VT-1" or apparatus == "VT-2":
+            apparatus = "VT"
         self.performances.append(Performance(name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score))
 
     def displayperformances(self):
@@ -28,6 +30,7 @@ class Gymnast:
             if self.performances[i].apparatus == apparatus and self.performances[i].score > score:
                 couldplace = True
                 score = self.performances[i].score
+
         return couldplace, score
       
     def findchancesofselling(self, round):
@@ -38,4 +41,5 @@ class Gymnast:
               if self.performances[i].apparatus == self.performances[j]:
                    gymnastname = self.performance[i]
                    pass #ssadasdasd
+
 

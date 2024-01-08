@@ -3,8 +3,8 @@ from division import Division
 # class for generating a potential olympic team for men and women
 class TeamGenerator:
     def __init__(self):
-        self.wdivision = Division("w")
-        self.mdivision = Division("m")
+        self.wdivision = Division("w", 1.4)
+        self.mdivision = Division("m", 0.8)
 
     def addperformance(self, name, gender, country, date, competition, round, location, apparatus, rank, dscore, escore, penalty, score):
         if gender == "w":
@@ -17,28 +17,15 @@ class TeamGenerator:
         self.wdivision.displayperformances()
         print("Men's Division:")
         self.mdivision.displayperformances()
-    
-    def tester(self,gender,apparatus,score=0):
-        if(gender=="m"):
-            return(self.mdivision.findingmax(apparatus))
-        if(gender=="w"):  
-            return(self.wdivision.findingmax(apparatus))
-        # print(self.wdivision.medalopportunity("BB", self.wdivision.findingmax("BB")))
+
+    def generateteams(self):
+        print("Women's Division")
+        self.wdivision.maketeam(["BB", "UB", "FX", "VT"])
+        print("Men's Division")
+        self.mdivision.maketeam(["FX", "HB", "PB", "PH", "SR", "VT"])
 
     # use for testing internal functions
     def test(self):
-        self.wdivision.numberofpeoplebetweengymnastandfirstplace('BB', 'Rebeca ANDRADE')
-        # print ("BB", end="")
-        # print(self.wdivision.medalopportunity("BB", self.wdivision.findingmax("BB")))
-        # print ("UB", end="")
-        # print(self.wdivision.medalopportunity("UB", self.wdivision.findingmax("UB")))
-        # print ("FX", end="")
-        # print(self.wdivision.medalopportunity("FX", self.wdivision.findingmax("FX")))
-        # print ("VT", end="")
-        # print(self.wdivision.medalopportunity("VT", self.wdivision.findingmax("VT")))
-        # print ("VT-1", end="")
-        # print(self.wdivision.medalopportunity("VT-1", self.wdivision.findingmax("VT-1")))
-        # print ("VT-2", end="")
-        # print(self.wdivision.medalopportunity("VT-2", self.wdivision.findingmax("VT-2")))
+        self.wdivision.maketeam(["BB", "UB", "FX", "VT"])
         return
         
