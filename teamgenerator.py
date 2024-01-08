@@ -21,8 +21,10 @@ class TeamGenerator:
     def generateteams(self):
         print("Women's Division")
         self.wdivision.maketeam()
+        self.wdivision.displaytable()
         print("Men's Division")
         self.mdivision.maketeam()
+        self.mdivision.displaytable()
 
     # use for testing internal functions
     def test(self):
