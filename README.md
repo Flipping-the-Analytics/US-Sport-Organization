@@ -4,6 +4,8 @@ About Flipping The Analytics - A model to predict best gymnastics mens and women
 
 Program Requirements - pip install matplotlib, pip install pandas, pip install scikit-learn
 
+Authors/Contributors - Alex Richardson, Aaron Tran, Michael Kalai
+
 UCSAS 2024 Data Competiton - https://statds.org/events/ucsas2024/
 
 Excel Data Sheet - https://github.com/ucsas/gym2024data/tree/main/cleandata
