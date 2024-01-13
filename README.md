@@ -4,7 +4,7 @@
 
 **Program Requirements** - pip install matplotlib, pip install pandas, pip install scikit-learn
 
-**Authors/Contributors** - Alex Richardson(https://github.com/Alex-Richardson-1), Aaron Tran(https://github.com/AaronQTran), Michael Kalai(https://github.com/michaelkalai)
+**Authors** - Alex Richardson(https://github.com/Alex-Richardson-1), Aaron Tran(https://github.com/AaronQTran), Michael Kalai(https://github.com/michaelkalai)
 
 **UCSAS 2024 Data Competiton** - https://statds.org/events/ucsas2024/
 
