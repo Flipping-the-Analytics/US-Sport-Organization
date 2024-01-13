@@ -95,10 +95,6 @@ class Division:
                 
         
         score_difference = firstplace_score - gymnast_score
-        # print('gymnast score:', gymnast_score)
-        # print('people between:', count)
-        # print('score difference:', score_difference)
-        # print(round(count * score_difference,5))
         return round(count*score_difference,5)
     
 
