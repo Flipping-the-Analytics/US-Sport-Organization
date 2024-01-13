@@ -1,6 +1,6 @@
 # US-Sport-Organization
 
-**About Flipping The Analytics** - A model to predict best gymnastics mens and womens team to win most medals at paris 2024 olympics given a dataset of gymnasts and their appratus scores
+**About Flipping The Analytics** - A model to predict best gymnastics mens and womens team to win most medals at the Paris 2024 Olympics given a dataset of gymnasts and their statistics
 
 **Program Requirements** - pip install matplotlib, pip install pandas, pip install scikit-learn
 
